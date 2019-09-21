@@ -1,0 +1,62 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: white;
+}
+
+.modal-wrapper {
+	display: flex;
+	width: 80vw;
+	height: 60vh;
+	background-color: #edeef2;
+	border-radius: 20px;
+	box-shadow: 0 0 10px -5px #2d2d2d;
+	flex-flow: column wrap;
+}
+
+.card-image {
+	height: 50%;
+	/* background-color: brown; */
+}
+
+.card-form {
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.form-wrapper {
+	/* display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column wrap; */
+}
+
+.form-input {
+	position: relative;
+	margin: 5px auto;
+}
+
+.form-input input {
+	outline: none;
+	border: none;
+	background-color: #9fa8b6;
+	color: #2d2d2d;
+	font-size: 16px;
+	padding: 5px;
+	padding-left: 30px;
+	box-sizing: border-box;
+}
+
+.form-input i {
+	color: #2d2d2d;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
