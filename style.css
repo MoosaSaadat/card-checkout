@@ -12,7 +12,7 @@ body {
 .modal-wrapper {
 	display: flex;
 	width: 80vw;
-	height: 60vh;
+	/* height: 60vh; */
 	background-color: #edeef2;
 	border-radius: 20px;
 	box-shadow: 0 0 10px -5px #2d2d2d;
@@ -31,11 +31,8 @@ body {
 	justify-content: center;
 }
 
-.form-wrapper {
-	/* display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-flow: column wrap; */
+form {
+	text-align: center;
 }
 
 .form-input {
@@ -46,17 +43,50 @@ body {
 .form-input input {
 	outline: none;
 	border: none;
-	background-color: #9fa8b6;
+	background-color: #bec5ce;
 	color: #2d2d2d;
-	font-size: 16px;
-	padding: 5px;
-	padding-left: 30px;
+	font-size: 12px;
+	padding: 10px 5px 10px 40px;
 	box-sizing: border-box;
+}
+
+.form-input input:focus {
+	background-color: #9fa8b6;
+	border-bottom: 2px solid #2d2d2d;
 }
 
 .form-input i {
 	color: #2d2d2d;
 	position: absolute;
-	top: 5px;
-	left: 5px;
+	top: 10px;
+	left: 10px;
+	font-size: 12px;
+}
+
+.btn {
+	background: #642b73;
+	background: -webkit-linear-gradient(to right, #c6426e, #642b73);
+	background: linear-gradient(to right, #c6426e, #642b73);
+	border-radius: 20px;
+	text-align: center;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	display: inline-block;
+}
+
+.btn button {
+	outline: none;
+	border: none;
+	font-size: 14px;
+	background: transparent;
+	color: white;
+	padding: 0;
+}
+
+.btn i {
+	position: relative;
+	top: 0;
+	left: 0;
+	color: white;
+	font-size: 14px;
 }
