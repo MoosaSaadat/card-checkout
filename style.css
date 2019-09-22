@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700|Nova+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700&display=swap');
+
 body {
 	width: 100vw;
 	height: 100vh;
@@ -17,11 +20,93 @@ body {
 	border-radius: 20px;
 	box-shadow: 0 0 10px -5px #2d2d2d;
 	flex-flow: column wrap;
+	padding: 1rem;
+	box-sizing: border-box;
 }
 
 .card-image {
+	font-family: 'IBM Plex Sans', sans-serif;
+	font-family: 'Nova Mono', monospace;
+	position: relative;
 	height: 50%;
-	/* background-color: brown; */
+	margin-bottom: 1rem;
+}
+
+.card-image img {
+	width: 100%;
+}
+
+.card-logo {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	display: flex;
+	width: 50px;
+	height: 30px;
+}
+
+.logo-circle {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.logo-circle.left {
+	background-color: #eb001b;
+}
+
+.logo-circle.right {
+	background-color: #f79e1b;
+	opacity: 0.8;
+	margin-left: -10px;
+}
+
+.card-front {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	color: #edeef2;
+	font-size: 14px;
+	letter-spacing: 1px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column wrap;
+}
+
+.card-info {
+	display: flex;
+	flex-flow: column wrap;
+	font-size: 12px;
+}
+
+.card-info.left {
+	text-align: left;
+	position: absolute;
+	left: 0.5rem;
+	bottom: 0.5rem;
+}
+
+.card-info.right {
+	text-align: right;
+	position: absolute;
+	right: 0.5rem;
+	bottom: 0.5rem;
+}
+
+.card-holder-title,
+.valid-thru-title {
+	font-size: 10px;
+	margin-bottom: 5px;
+}
+
+.active-border {
+	border: 1px solid #f79e1b;
+	border-radius: 5px;
+	padding: 5px;
 }
 
 .card-form {
