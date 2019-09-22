@@ -14,12 +14,14 @@ body {
 
 .modal-wrapper {
 	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-items: center;
 	width: 80vw;
 	/* height: 60vh; */
 	background-color: #edeef2;
 	border-radius: 20px;
 	box-shadow: 0 0 10px -5px #2d2d2d;
-	flex-flow: column wrap;
 	padding: 1rem;
 	box-sizing: border-box;
 }
@@ -27,12 +29,15 @@ body {
 .card-image {
 	font-family: 'Nova Mono', monospace;
 	position: relative;
+	width: 100%;
+	max-width: 300px;
 	height: 50%;
 	margin-bottom: 1rem;
 }
 
 .card-image img {
 	width: 100%;
+	max-width: 300px;
 }
 
 .card-logo {
@@ -61,7 +66,8 @@ body {
 	margin-left: -10px;
 }
 
-.card-front {
+.card-front,
+.card-rear {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -76,30 +82,70 @@ body {
 	flex-flow: column wrap;
 }
 
-.card-info {
+.card-front .card-info {
 	display: flex;
 	flex-flow: column wrap;
 	font-size: 12px;
 }
 
-.card-info.left {
+.card-front .card-info.left {
 	text-align: left;
 	position: absolute;
 	left: 0.75rem;
 	bottom: 0.75rem;
 }
 
-.card-info.right {
+.card-front .card-info.right {
 	text-align: right;
 	position: absolute;
 	right: 0.75rem;
 	bottom: 0.75rem;
 }
 
-.card-holder-title,
-.valid-thru-title {
+.card-front .card-holder-title,
+.card-front .valid-thru-title {
 	font-size: 10px;
 	margin-bottom: 5px;
+}
+
+.card-front {
+	display: none;
+}
+
+.card-rear .black-bar {
+	position: absolute;
+	left: 0px;
+	top: 10%;
+	width: 100%;
+	height: 30px;
+	background-color: black;
+}
+
+.card-rear .card-info {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	padding-left: 5%;
+}
+
+.card-rear .card-info .white-bar {
+	width: 50%;
+	height: 30px;
+	background-color: #757575;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5' height='5' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23ffffff' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23ffffff' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.card-rear .card-info .security-code {
+	background: white;
+	color: #2d2d2d;
+	border-radius: 5px;
+	padding: 5px 10px;
+	margin: 0 10px;
+}
+
+.card-logo {
+	top: unset;
+	bottom: 1rem;
 }
 
 .active-border {
@@ -248,5 +294,31 @@ form {
 	100% {
 		-webkit-transform: rotateY(180deg);
 		transform: rotateY(180deg);
+	}
+}
+
+@media screen and (min-width: 500px) {
+	.modal-wrapper {
+		width: 70vw;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.modal-wrapper {
+		width: 80vw;
+		flex-flow: row nowrap;
+		justify-content: space-evenly;
+	}
+}
+
+@media screen and (min-width: 900px) {
+	.modal-wrapper {
+		width: 70vw;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.modal-wrapper {
+		width: 50vw;
 	}
 }
