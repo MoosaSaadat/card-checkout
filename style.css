@@ -38,15 +38,23 @@ body {
 .card-image .card-background {
 	width: 100%;
 	max-width: 300px;
+	box-shadow: 0px 10px 10px -10px black;
 }
 
 .card-logo {
 	position: absolute;
-	top: 0.5rem;
 	right: 0.5rem;
 	display: flex;
 	width: 50px;
 	height: 30px;
+}
+
+.card-front .card-logo {
+	top: 0.5rem;
+}
+
+.card-rear .card-logo {
+	bottom: 1rem;
 }
 
 .logo-circle {
@@ -260,5 +268,14 @@ form {
 	}
 	100% {
 		transform: rotateZ(0deg) rotateY(180deg);
+	}
+}
+
+@keyframes flipCardContent {
+	0% {
+		transform: rotateY(-180deg);
+	}
+	100% {
+		transform: rotateY(-180deg);
 	}
 }

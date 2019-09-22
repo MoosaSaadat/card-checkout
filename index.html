@@ -12,11 +12,11 @@
   <div class="modal-wrapper">
     <div class="card-image">
       <img class="card-background" src="card.png" alt="Credit Card">
-      <div class="card-logo">
-        <div class="logo-circle left"></div>
-        <div class="logo-circle right"></div>
-      </div>
       <div class="card-front">
+        <div class="card-logo">
+          <div class="logo-circle left"></div>
+          <div class="logo-circle right"></div>
+        </div>
         <span class="card-number">XXXX XXXX XXXX XXXX</span>
         <div class="card-info left">
           <span class="card-holder-title">CARDHOLDER NAME</span>
@@ -28,6 +28,10 @@
         </div>
       </div>
       <div class="card-rear">
+        <div class="card-logo">
+          <div class="logo-circle left"></div>
+          <div class="logo-circle right"></div>
+        </div>
         <div class="black-bar"></div>
         <div class="card-info">
           <span class="white-bar"></span>
@@ -40,19 +44,19 @@
           <form action="#">
             <div class="form-input">
               <i class="far fa-credit-card"></i>
-              <input type="text" name="card-number" id="#number" placeholder="Card Number" onclick="flipCard(event);" value="">
+              <input type="text" name="card-number" id="#number" placeholder="Card Number" onclick="flipCard(event);" onblur="deactivateBorder(event)" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-user"></i>
-              <input type="text" name="holder-name" id="#name" placeholder="Card Holder Name" onclick="flipCard(event);" value="">
+              <input type="text" name="card-holder-name" id="#name" placeholder="Card Holder Name" onclick="flipCard(event);" onblur="deactivateBorder(event)" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-calendar-day"></i>
-              <input type="text" name="card-expiry" id="#expiry" placeholder="Expiry Date" onclick="flipCard(event);" value="">
+              <input type="text" name="valid-thru-date" id="#expiry" placeholder="Expiry Date" onclick="flipCard(event);" onblur="deactivateBorder(event)" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-lock"></i>
-              <input type="number" name="security-code" id="#code" placeholder="Security Code" onclick="flipCard(event);" value="">
+              <input type="number" name="security-code" id="#code" placeholder="Security Code" onclick="flipCard(event);" onblur="deactivateBorder(event)" value="">
             </div>
             <div class="form-input btn">
               <i class="fas fa-check"></i>
@@ -74,28 +78,49 @@
     console.log(creditCard, cardFront, cardRear, cardLogo);
 
     function flipCard(e) {
+      activateBorder(e);
       setTimeout(changeCardFace, animDuration/2);
       if ((isFront && e.target.name == "security-code") || (!isFront && e.target.name != "security-code")) {
         //Flip Card
-        cardContainer.style.animation = `flipCard ${animDuration}ms ease-in-out`;
-        setTimeout(() => {cardContainer.style.animation= "none";}, animDuration);
+        cardContainer.style.animation = `flipCard ${animDuration}ms`;
+        if (isFront) {
+          // cardRear.style.animation = `flipCardContent ${animDuration}ms`;
+        }
+        else {
+          // cardFront.style.animation = `flipCardContent ${animDuration}ms`;
+        }
+        setTimeout(removeAnimation, animDuration);
         isFront = !isFront;
       }
+    }
+
+    function removeAnimation () {
+      cardContainer.style.animation= "none";
+      if (isFront) cardRear.style.animation= "none";
+      else cardFront.style.animation= "none";
+        cardRear.style.transform = "none";
+        cardFront.style.transform = "none";
     }
     function changeCardFace() {
       console.log("changing face for", isFront);
       if (!isFront) {     //CHANGE FACE FROM front TO rear
         cardFront.style.display = "none";
         cardRear.style.display = "flex";
-        cardLogo.style.bottom = "0.5rem";
-        cardLogo.style.top = "unset";
+        cardRear.style.transform = "rotateY(-180deg)";
       }
       else {              //CHANGE FACE FROM rear TO front
         cardFront.style.display = "flex";
         cardRear.style.display = "none";
-        cardLogo.style.top = "0.5rem";
-        cardLogo.style.bottom = "unset";
+        cardFront.style.transform = "rotateY(-180deg)";
       }
+    }
+    function activateBorder(e) {
+      let focusedInput = document.querySelector(`.${e.target.name}`);
+      focusedInput.classList.add("active-border");
+    }
+    function deactivateBorder(e) {
+      let focusedInput = document.querySelector(`.${e.target.name}`);
+      focusedInput.classList.remove("active-border");
     }
   </script>
 </body>
