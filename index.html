@@ -11,7 +11,7 @@
 <body>
   <div class="modal-wrapper">
     <div class="card-image">
-      <img src="card.png" alt="Card">
+      <img class="card-background" src="card.png" alt="Credit Card">
       <div class="card-logo">
         <div class="logo-circle left"></div>
         <div class="logo-circle right"></div>
@@ -40,19 +40,19 @@
           <form action="#">
             <div class="form-input">
               <i class="far fa-credit-card"></i>
-              <input type="text" name="card-number" id="#number" placeholder="Card Number" value="">
+              <input type="text" name="card-number" id="#number" placeholder="Card Number" onclick="flipCard(event);" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-user"></i>
-              <input type="text" name="holder-name" id="#name" placeholder="Card Holder Name" value="">
+              <input type="text" name="holder-name" id="#name" placeholder="Card Holder Name" onclick="flipCard(event);" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-calendar-day"></i>
-              <input type="text" name="card-expiry" id="#expiry" placeholder="Expiry Date" value="">
+              <input type="text" name="card-expiry" id="#expiry" placeholder="Expiry Date" onclick="flipCard(event);" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-lock"></i>
-              <input type="number" name="security-code" id="#code" placeholder="Security Code" value="">
+              <input type="number" name="security-code" id="#code" placeholder="Security Code" onclick="flipCard(event);" value="">
             </div>
             <div class="form-input btn">
               <i class="fas fa-check"></i>
@@ -62,5 +62,41 @@
         </div>
     </div>
   </div>
+  <script>
+    var isFront = true;
+    var animDuration = 500;
+    var cardContainer = document.querySelector(".card-image");
+    var creditCard = document.querySelector(".card-background");
+    var cardFront = document.querySelector(".card-front");
+    var cardRear = document.querySelector(".card-rear");
+    var cardLogo = document.querySelector(".card-logo");
+
+    console.log(creditCard, cardFront, cardRear, cardLogo);
+
+    function flipCard(e) {
+      setTimeout(changeCardFace, animDuration/2);
+      if ((isFront && e.target.name == "security-code") || (!isFront && e.target.name != "security-code")) {
+        //Flip Card
+        cardContainer.style.animation = `flipCard ${animDuration}ms ease-in-out`;
+        setTimeout(() => {cardContainer.style.animation= "none";}, animDuration);
+        isFront = !isFront;
+      }
+    }
+    function changeCardFace() {
+      console.log("changing face for", isFront);
+      if (!isFront) {     //CHANGE FACE FROM front TO rear
+        cardFront.style.display = "none";
+        cardRear.style.display = "flex";
+        cardLogo.style.bottom = "0.5rem";
+        cardLogo.style.top = "unset";
+      }
+      else {              //CHANGE FACE FROM rear TO front
+        cardFront.style.display = "flex";
+        cardRear.style.display = "none";
+        cardLogo.style.top = "0.5rem";
+        cardLogo.style.bottom = "unset";
+      }
+    }
+  </script>
 </body>
 </html>
