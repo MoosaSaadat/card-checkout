@@ -98,6 +98,7 @@
       let removePadding = 4; //PADDING+BORDER OF .active-border
 
       borderBox.style.display = "inline-block";
+      borderBox.style.opacity = "1";
       borderBox.style.height = newRect.height + "px";
       borderBox.style.width = newRect.width + "px";
       borderBox.style.top = (newRect.top - removePadding) + "px";
@@ -105,8 +106,7 @@
     }
     function deactivateBorder(e) {
       let borderBox = document.querySelector(".active-border");
-      // borderBox.classList.remove("active-border");
-      // borderBox.style.display = "none";
+      borderBox.style.opacity = "0";
     }
     function traceNumberInput(e) {
       let focusedInput = document.querySelector(`.${e.target.name}`);

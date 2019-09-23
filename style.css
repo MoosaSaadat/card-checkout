@@ -171,8 +171,8 @@ body {
 	border: 1px solid #f79e1b;
 	border-radius: 5px;
 	padding: 3px;
-	z-index: 3;
-	transition: all ease-in-out 0.5s;
+	transition: left ease-in-out 0.5s, top ease-in-out 0.5s,
+		width ease-in-out 0.5s, height ease-in-out 0.5s;
 }
 
 .card-form {
