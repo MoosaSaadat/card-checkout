@@ -11,8 +11,8 @@
 <body>
   <div class="modal-wrapper">
     <div class="card-image">
-      <img class="card-background" src="card.png" alt="Credit Card">
       <div class="card-front">
+        <img class="card-background" src="card.png" alt="Credit Card">
         <div class="card-logo">
           <div class="logo-circle left"></div>
           <div class="logo-circle right"></div>
@@ -28,6 +28,7 @@
         </div>
       </div>
       <div class="card-rear">
+        <img class="card-background" src="card.png" alt="Credit Card">
         <div class="card-logo">
           <div class="logo-circle left"></div>
           <div class="logo-circle right"></div>
@@ -38,6 +39,7 @@
           <span class="security-code">123</span>
         </div>
       </div>
+      <span class="active-border"></span>
     </div>
     <div class="card-form">
         <div class="form-wrapper">
@@ -48,7 +50,7 @@
             </div>
             <div class="form-input">
               <i class="fas fa-user"></i>
-              <input type="text" name="card-holder-name" id="#name" placeholder="Card Holder Name" onclick="flipCard(event);" onblur="deactivateBorder(event)" value="">
+              <input type="text" name="card-holder-name" id="#name" placeholder="Card Holder Name" onclick="flipCard(event);" onblur="deactivateBorder(event)" onchange="traceNameInput(event)" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-calendar-day"></i>
@@ -68,59 +70,67 @@
   </div>
   <script>
     var isFront = true;
-    var animDuration = 500;
     var cardContainer = document.querySelector(".card-image");
     var creditCard = document.querySelector(".card-background");
     var cardFront = document.querySelector(".card-front");
     var cardRear = document.querySelector(".card-rear");
     var cardLogo = document.querySelector(".card-logo");
 
-    console.log(creditCard, cardFront, cardRear, cardLogo);
-
     function flipCard(e) {
-      activateBorder(e);
-      setTimeout(changeCardFace, animDuration/2);
       if ((isFront && e.target.name == "security-code") || (!isFront && e.target.name != "security-code")) {
-        //Flip Card
-        cardContainer.style.animation = `flipCard ${animDuration}ms`;
+        setTimeout(() => {activateBorder(e);}, 500);
         if (isFront) {
-          // cardRear.style.animation = `flipCardContent ${animDuration}ms`;
+          cardFront.style.transform = "perspective( 600px ) rotateY( -180deg )";
+          cardRear.style.transform = "perspective( 600px ) rotateY( 0deg )";
         }
         else {
-          // cardFront.style.animation = `flipCardContent ${animDuration}ms`;
+          cardFront.style.transform = "perspective( 600px ) rotateY( 0deg )";
+          cardRear.style.transform = "perspective( 600px ) rotateY( 180deg )";
         }
-        setTimeout(removeAnimation, animDuration);
         isFront = !isFront;
       }
-    }
-
-    function removeAnimation () {
-      cardContainer.style.animation= "none";
-      if (isFront) cardRear.style.animation= "none";
-      else cardFront.style.animation= "none";
-        cardRear.style.transform = "none";
-        cardFront.style.transform = "none";
-    }
-    function changeCardFace() {
-      console.log("changing face for", isFront);
-      if (!isFront) {     //CHANGE FACE FROM front TO rear
-        cardFront.style.display = "none";
-        cardRear.style.display = "flex";
-        cardRear.style.transform = "rotateY(-180deg)";
-      }
-      else {              //CHANGE FACE FROM rear TO front
-        cardFront.style.display = "flex";
-        cardRear.style.display = "none";
-        cardFront.style.transform = "rotateY(-180deg)";
-      }
+      else activateBorder(e);
     }
     function activateBorder(e) {
+      let borderBox = document.querySelector(".active-border");
       let focusedInput = document.querySelector(`.${e.target.name}`);
-      focusedInput.classList.add("active-border");
+      let newRect = focusedInput.getBoundingClientRect();
+      let removePadding = 4; //PADDING+BORDER OF .active-border
+
+      borderBox.style.display = "inline-block";
+      borderBox.style.height = newRect.height + "px";
+      borderBox.style.width = newRect.width + "px";
+      borderBox.style.top = (newRect.top - removePadding) + "px";
+      borderBox.style.left = (newRect.left - removePadding) + "px";
     }
     function deactivateBorder(e) {
+      let borderBox = document.querySelector(".active-border");
+      // borderBox.classList.remove("active-border");
+      // borderBox.style.display = "none";
+    }
+    function traceNumberInput(e) {
       let focusedInput = document.querySelector(`.${e.target.name}`);
-      focusedInput.classList.remove("active-border");
+
+    }
+    function traceNameInput(e) {
+      let focusedInput = document.querySelector(`.${e.target.name}`);
+      if (e.target.value == "") focusedInput.innerHTML = "NAME SURNAME";
+      else focusedInput.innerHTML = e.target.value;
+    }
+    function traceDateInput(e) {
+      let focusedInput = document.querySelector(`.${e.target.name}`);
+
+    }
+    function traceCodeInput(e) {
+      let focusedInput = document.querySelector(`.${e.target.name}`);
+
+    }
+    window.addEventListener("load", getImageSize);
+    window.addEventListener("resize", getImageSize);
+    function getImageSize () {
+      var img = document.querySelector('.card-background'); 
+      cardContainer.style.height = img.clientHeight + "px";
+      cardContainer.style.width = img.clientWidth + "px";
     }
   </script>
 </body>
