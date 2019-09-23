@@ -166,8 +166,8 @@
         e.target.value = e.target.value.substr(0, 3);
       }
     }
-    window.addEventListener("load", getImageSize);
-    window.addEventListener("resize", getImageSize);
+    // window.addEventListener("load", getImageSize);
+    // window.addEventListener("resize", getImageSize);
     function getImageSize () {
       var img = document.querySelector('.card-background'); 
       cardContainer.style.height = img.clientHeight + "px";
