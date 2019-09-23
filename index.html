@@ -46,11 +46,11 @@
           <form action="#">
             <div class="form-input">
               <i class="far fa-credit-card"></i>
-              <input type="text" name="card-number" id="#number" placeholder="Card Number" onclick="flipCard(event);" onblur="deactivateBorder(event)" value="">
+              <input type="number" name="card-number" id="#number" placeholder="Card Number" onclick="flipCard(event);" onblur="deactivateBorder(event)" onkeyup="traceNumberInput(event)" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-user"></i>
-              <input type="text" name="card-holder-name" id="#name" placeholder="Card Holder Name" onclick="flipCard(event);" onblur="deactivateBorder(event)" onchange="traceNameInput(event)" value="">
+              <input type="text" name="card-holder-name" id="#name" placeholder="Card Holder Name" onclick="flipCard(event);" onblur="deactivateBorder(event)" onkeyup="traceNameInput(event)" value="">
             </div>
             <div class="form-input">
               <i class="fas fa-calendar-day"></i>
@@ -110,12 +110,28 @@
     }
     function traceNumberInput(e) {
       let focusedInput = document.querySelector(`.${e.target.name}`);
-
+      let newString = "";
+      if (e.target.value.length <= 16) {
+        let userInput = e.target.value;
+        for (let i = 0; i < 16; i++) {
+          if (i < userInput.length) {
+            newString += userInput[i];
+          }
+          else {
+            newString += "X";
+          }
+          if ((i + 1) % 4 == 0) newString += " ";
+        }
+        focusedInput.innerHTML = newString;
+        console.log(e.keyCode);
+      }
     }
     function traceNameInput(e) {
+      if (e.target.value.length > 11) activateBorder(e);
+
       let focusedInput = document.querySelector(`.${e.target.name}`);
       if (e.target.value == "") focusedInput.innerHTML = "NAME SURNAME";
-      else focusedInput.innerHTML = e.target.value;
+      else focusedInput.innerHTML = e.target.value.toUpperCase();
     }
     function traceDateInput(e) {
       let focusedInput = document.querySelector(`.${e.target.name}`);
